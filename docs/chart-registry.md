@@ -8,6 +8,9 @@
 
 | ID | Role | Status | Location | Style | Keep in sync with | Verified | sha8 | Rev |
 |----|------|--------|----------|-------|-------------------|----------|------|-----|
+| CH-readme-01 | master | current | `README.md:59-75` | unicode-box | the session loop description | 2026-10-20 | 585b50d9 | 1 |
+| CH-readme-02 | master | current | `README.md:86-94` | unicode-box | the feature-branch policy flow | 2026-10-20 | 73d3b67c | 1 |
+| CH-readme-03 | master | current | `README.md:105-113` | unicode-box | the context-tier table in agent-context/ignore-files.md | 2026-10-20 | ef055523 | 1 |
 | CH-harness-readme-01 | master | current | `harness/README.md:5-8` | tree | the harness folder layout | 2026-10-20 | 96b06f4e | 1 |
 
 ## Catalog
@@ -30,3 +33,88 @@ says when the tier is loaded/read.
 tier (e.g. `02-future/`) means updating this tree.
 
 **Sites:** master `harness/README.md` · status: current, verified 2026-10-20.
+
+
+### CH-readme-01 · The session loop
+
+```text
+        you (the human)
+        │  goal · review · the only deploy key
+        ▼
+┌───────────────┐  loads every session  ┌────────────────────────────────┐
+│ coding agent  │◄─────────────────────►│ harness/00-global-context/     │
+│               │                       │ rules · build · git workflow   │
+│ edits code    │  loads on task match  ├────────────────────────────────┤
+│ runs tests    │◄─────────────────────►│ harness/01-features/<stage>/   │
+│ writes docs   │                       │ the spec + acceptance criteria │
+└───────┬───────┘                       └────────────────────────────────┘
+        │  every claim needs a transcript
+        ▼
+┌───────────────┐  tees transcripts      harness/02-knowledge/
+│  test gate    │───────────────────────► evidence-<feature>-<date>/
+└───────┬───────┘  + process report      <feature>-<date>.md  ("the why")
+        ▼
+ 4-section commit ─► BRANCH manifest ─► squash-merge ─► FEATURES index
+```
+
+**Shows:** one working session end to end — the human sets the goal, the
+agent reads constitution + spec, the gate produces transcripts, and the
+commit/manifest/index chain records it.
+
+**How to read it:** horizontal double arrows = what the agent loads;
+downward flow = the path a change takes toward main; the right-hand
+labels name the destination folders.
+
+**Keep in sync with:** the tier descriptions in `harness/README.md`
+(CH-harness-readme-01) and the evidence rule in
+`harness/02-knowledge/EVIDENCE-CONVENTIONS.md`.
+
+**Sites:** master `README.md` · status: current, verified 2026-10-20.
+
+### CH-readme-02 · The life of a feature
+
+```text
+ proposal / spec            branch cut                 implementation
+┌──────────────┐  approve  ┌───────────────┐  build    ┌───────────────┐
+│ feature      │──────────►│ feature/<x>   │──────────►│ code + tests  │
+│ template     │           │ + BRANCH.md   │           │ against ACs   │
+└──────────────┘           └───────────────┘           └───────┬───────┘
+                                                                │ gate green,
+                                                                ▼ evidence filed
+ FEATURES row   ◄────────  squash-merge  ◄──────────────────────┘
+ (index updated)            (4-section message)
+```
+
+**Shows:** the branch ritual from spec to landed feature.
+
+**How to read it:** left to right = time; the bottom return path is the
+merge back to the baseline that updates the FEATURES index.
+
+**Keep in sync with:** `git-workflow/feature-branch-policy.md` (the
+merge ritual section) and the BRANCH/FEATURES templates.
+
+**Sites:** master `README.md` · status: current, verified 2026-10-20.
+
+### CH-readme-03 · Context economy
+
+```text
+   always loaded (small, stable)      on task match            never auto-loaded
+┌─────────────────────────────┐ ┌──────────────────────┐ ┌──────────────────────┐
+│ AGENTS.md / CLAUDE.md       │ │ 01-features/<stage>/ │ │ 02-knowledge/ (the   │
+│ 00-global-context/          │ │ the one spec in play │ │ evidence library)    │
+│ constitution: rules, build, │ │ acceptance criteria  │ │ 02-future/ (parking  │
+│ workflow, privacy           │ │                      │ │ lot), archives,      │
+│                             │ │ BRANCH manifest of   │ │ vendored code,       │
+│                             │ │ the open branch      │ │ frozen proposals     │
+└─────────────────────────────┘ └──────────────────────┘ └──────────────────────┘
+```
+
+**Shows:** what an agent loads, when, and what it never loads.
+
+**How to read it:** three columns = three loading policies; the middle
+column is per-task, the right column is opt-in by explicit read.
+
+**Keep in sync with:** `agent-context/ignore-files.md` §2 (the tier
+table) and the banner in `templates/02-future-README.template.md`.
+
+**Sites:** master `README.md` · status: current, verified 2026-10-20.
