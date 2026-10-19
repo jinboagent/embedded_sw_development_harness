@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-# KIT CONFIG BANNER — edit these constants when adopting (from the source
-# project; everything else is generic):
-#   REGISTRY (~line 42)        -> docs/chart-registry.<agent>.md path
-#   TEXT_EXT / EXEMPT_PARTS / EXEMPT_FILES / SKIP_DIRS (~lines 66-81)
-#                               -> your frozen dirs, vendored code, archives
-#   is_frozen() prefix (~line 87) -> your point-in-time filename convention
-#   frozen_status vocabulary (~line 295) -> match your registry statuses
-# Usage after adoption: python check_charts.py --scan   (adopt existing charts)
-"""Chart-registry checker — keeps ASCII charts honest (see docs/chart-registry.zcode.md).
+# KIT CONFIG BANNER — edit these constants when adopting (everything else is
+# generic and needs no changes):
+#   REGISTRY      -> docs/chart-registry.<agent>.md path (replace "zcode" with
+#                    your agent tag; see templates for the naming convention)
+#   EXEMPT_PARTS  -> your frozen dirs, vendored code, archives (never scanned
+#                    for orphans)
+#   EXEMPT_FILES  -> your point-in-time files (tostudy.md, the registry itself,
+#                    this script)
+#   frozen_status (bottom) -> match your registry status vocabulary
+# Usage after adoption: python tools/check_charts.py --scan   (adopt existing charts)
+"""Chart-registry checker — keeps ASCII charts honest (see docs/chart-registry.<agent>.md).
 
 Every ASCII diagram in a *maintained* file carries a marker line next to it:
 
@@ -15,7 +17,7 @@ Every ASCII diagram in a *maintained* file carries a marker line next to it:
     chart-id: CH-assist-py-01 rev1              (python docstrings)
     // chart-id: CH-cli-c-01 rev1               (c comments)
 
-docs/chart-registry.zcode.md holds one tracking-table row per site:
+docs/chart-registry.<agent>.md holds one tracking-table row per site:
 
     | CH-readme-01 | master | current | README.md:38-61 | ascii-plus | ... | 2026-09-26 | 1a2b3c4d | 1 |
 
@@ -30,14 +32,13 @@ registry:
     STALE     row status says stale — refresh reminder
 
 Advisory by design: run it before merging anything that touches docs.
-Exempt (frozen) paths are never scanned for orphans: docs/archive/,
-status/archive/, docs/templates/, docs/tostudy.md and the feature-proposal
-docs are point-in-time records.
+Exempt (frozen) paths are never scanned for orphans (see EXEMPT_PARTS /
+EXEMPT_FILES below).
 
 Usage:
-  python scripts/check_charts.py                # cross-check vs registry
-  python scripts/check_charts.py --scan         # dump detected blocks + hashes
-  python scripts/check_charts.py --scan --all   # include frozen/exempt paths
+  python tools/check_charts.py                # cross-check vs registry
+  python tools/check_charts.py --scan         # dump detected blocks + hashes
+  python tools/check_charts.py --scan --all   # include frozen/exempt paths
 """
 import argparse
 import hashlib
@@ -47,7 +48,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-REGISTRY = os.path.join(ROOT, "docs", "chart-registry.zcode.md")
+REGISTRY = os.path.join(ROOT, "docs", "chart-registry.md")  # KIT: the kit's own registry; adopters may suffix with their agent tag
 
 # --- chart-block detection -------------------------------------------------
 # STRONG lines are unambiguous chart syntax; WEAK lines (box interiors, rule
@@ -74,16 +75,17 @@ REGISTRY_ROW = re.compile(
 TEXT_EXT = {".md", ".py", ".c", ".h", ".txt", ".html"}
 # frozen point-in-time records: scanned only with --all, never ORPHANs
 EXEMPT_PARTS = (
+    # KIT: add your frozen point-in-time dirs here (they are never scanned for
+    # orphans — only listed with --scan --all). Generic examples:
+    os.path.join("templates") + os.sep,                                  # kit/adapted templates
     os.path.join("docs", "archive") + os.sep,
     os.path.join("status", "archive") + os.sep,
     os.path.join("docs", "templates") + os.sep,
     os.path.join("vendor_reference") + os.sep,                          # third-party
-    os.path.join("firmware", "components", "lua", "include") + os.sep,  # vendored Lua
-    os.path.join("firmware", "components", "lua", "src") + os.sep,      # vendored Lua
 )
 EXEMPT_FILES = {"docs" + os.sep + "tostudy.md",
-                "docs" + os.sep + "chart-registry.zcode.md",  # the catalog itself
-                os.path.join("scripts", "check_charts.py")}   # own examples
+                "docs" + os.sep + "chart-registry.md",  # the catalog itself (match your registry name)
+                os.path.join("tools", "check_charts.py")}     # own examples
 SKIP_DIRS = {".git", "node_modules", "build", "build_off", "managed_components",
              "__pycache__", ".pytest_cache", ".claude", ".qwen", ".zcode",
              ".vscode", ".aider.tags.cache.v4"}
@@ -93,13 +95,6 @@ def is_frozen(rel):
     rel = rel.replace("/", os.sep)
     return (rel.startswith(EXEMPT_PARTS) or rel in EXEMPT_FILES
             or os.path.basename(rel).startswith("feature-proposal-"))
-
-
-def chart_lines(text_lines):
-    """Yield (index, line) for lines that look like chart content."""
-    for i, ln in enumerate(text_lines):
-        if CHART_LINE.search(ln):
-            yield i, ln
 
 
 def find_blocks(text_lines, fenced_only=False, fenced=None):

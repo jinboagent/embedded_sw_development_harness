@@ -1,5 +1,6 @@
 # The harness — three tiers of project truth
 
+<!-- chart-id: CH-harness-readme-01 rev1 -->
 ```
 harness/
 ├── 00-global-context/   the constitution — always in agent context

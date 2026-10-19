@@ -6,7 +6,7 @@
 {{One paragraph: what it is, who uses it, what it replaces.}}
 
 {{ASCII architecture diagram — register it in the chart registry:
-`<!-- chart-id: CH-overview-01 rev1 -->` above the fence.}}
+`<!-- chart-id: CH-{{file-slug}}-01 rev1 -->  (register the real one after adoption)` above the fence.}}
 
 ```
 {{ARCHITECTURE DIAGRAM}}

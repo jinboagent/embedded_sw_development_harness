@@ -57,5 +57,6 @@ sits, what is deliberately thin.}}
 | `harness/00-global-context/` | Product spec, coding rules, build env, git workflow, publishing/privacy + documentation rules |
 | `harness/01-features/` | Per-feature specs ({{stages}}) |
 | `harness/02-knowledge/` | Process reports + run-transcript evidence |
+| `bug_check/README.md` | Consolidated bug tracking |
 | `status/LATEST.md` | Latest status snapshot + pointer |
 | `docs/quickstart.md` | 10-minute getting-started path |

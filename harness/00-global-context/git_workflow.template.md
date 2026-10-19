@@ -44,6 +44,13 @@ Every significant session leaves a report in `harness/02-knowledge/`:
 
 Report shape: `harness/02-knowledge/process-report.template.md`.
 
+## Bug tracking (by ID)
+
+Bugs are tracked by short stable ID in `bug_check/README.md` (index +
+deferred list + archive); `fix` commits reference the ID, and each bug
+batch gets a `bug_check/bug_fix_report/fix-report-<date>.md`. Templates:
+`templates/bug-tracking.template.md`, `templates/fix-report.template.md`.
+
 ## The learning journal (`docs/tostudy.md`)
 
 After each significant session, append what deserved deeper study: topic

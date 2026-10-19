@@ -5,7 +5,7 @@
      on-target vs host-build comments (this repo ran them host-side), and
      the module include paths. Everything else is generic Unity C. -->
 
-> Copy this template to `tests/harness/test_<module>_on_target.c` and
+> Copy this template to `tests/host/test_<module>_on_target.c` and
 > replace all `<placeholder>` tokens.
 
 ## File Template
@@ -166,7 +166,7 @@ TEST_ASSERT_INT_WITHIN(delta, expected, actual);
 ### Directory Layout
 
 ```
-tests/harness/
+tests/host/
 ├── CMakeLists.txt
 ├── unity/                  # Unity source (unity.c, unity.h, unity_internals.h)
 ├── mocks/                  # Mock/stub .c files for dependencies
@@ -180,7 +180,7 @@ tests/harness/
 
 ```cmake
 cmake_minimum_required(VERSION 3.16)
-project(ble_bridge_tests C)
+project({{PROJECT}}_tests C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -219,7 +219,7 @@ target_include_directories(test_<module>_on_target PRIVATE
 ### Build & Run
 
 ```bash
-cd tests/harness
+cd tests/host
 cmake -B build -S .
 cmake --build build
 ./build/test_<module>_on_target
@@ -232,6 +232,6 @@ cmake --build build
   directory or guarded with `#ifdef ESP_PLATFORM` in the source.
 - Unity is vendored — download `unity.c`, `unity.h`, `unity_internals.h`
   from [ThrowTheSwitch/Unity](https://github.com/ThrowTheSwitch/Unity)
-  and place them in `tests/harness/unity/`.
+  and place them in `tests/host/unity/`.
 - No `malloc`/`free` in test code or module code — all buffers are
   stack-allocated or `static`.

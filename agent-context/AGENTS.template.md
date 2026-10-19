@@ -28,6 +28,8 @@ Name the closed loop if there is one.}}
 | `harness/00-global-context/` | Product spec, coding rules, build env, git workflow, publishing/privacy + documentation rules |
 | `harness/01-features/` | Per-feature specs ({{stage folders}}) |
 | `harness/02-knowledge/` | Process reports + run-transcript evidence (the WHY behind commits) |
+| `bug_check/README.md` | Consolidated bug tracking (index + fix reports) |
+| `docs/quickstart.md`, `docs/tostudy.md` | 10-minute path; learning journal |
 | `status/LATEST.md`, `BRANCH.{{AGENT_TAG}}.md`, `FEATURES.{{AGENT_TAG}}.md` | Current state, active branch manifest, merged-feature index |
 
 ## Build & test

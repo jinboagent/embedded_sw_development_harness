@@ -28,6 +28,9 @@ type(scope): summary
   are exempt.
 - **Verification must be reproducible** — a reader with the parent commit
   should be able to run your commands and see your counts.
+- **`fix` commits reference the bug ID** (`fix(scope): … (B1)`) from
+  `bug_check/README.md` — the ID links the commit to its index row and
+  fix report.
 
 ## Install the hook (once per clone)
 
