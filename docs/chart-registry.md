@@ -8,9 +8,10 @@
 
 | ID | Role | Status | Location | Style | Keep in sync with | Verified | sha8 | Rev |
 |----|------|--------|----------|-------|-------------------|----------|------|-----|
-| CH-readme-01 | master | current | `README.md:59-75` | unicode-box | the session loop description | 2026-10-20 | 585b50d9 | 1 |
-| CH-readme-02 | master | current | `README.md:86-94` | unicode-box | the feature-branch policy flow | 2026-10-20 | 73d3b67c | 1 |
-| CH-readme-03 | master | current | `README.md:105-113` | unicode-box | the context-tier table in agent-context/ignore-files.md | 2026-10-20 | ef055523 | 1 |
+| CH-readme-04 | master | current | `README.md:142-144` | unicode-box | the document-driven loop (doctrine section) | 2026-10-20 | 5c64bcbe | 1 |
+| CH-readme-01 | master | current | `README.md:86-102` | unicode-box | the session loop description | 2026-10-20 | 585b50d9 | 1 |
+| CH-readme-02 | master | current | `README.md:169-177` | unicode-box | the feature-branch policy flow | 2026-10-20 | 73d3b67c | 1 |
+| CH-readme-03 | master | current | `README.md:207-215` | unicode-box | the context-tier table in agent-context/ignore-files.md | 2026-10-20 | ef055523 | 1 |
 | CH-harness-readme-01 | master | current | `harness/README.md:5-8` | tree | the harness folder layout | 2026-10-20 | 96b06f4e | 1 |
 
 ## Catalog
@@ -116,5 +117,25 @@ column is per-task, the right column is opt-in by explicit read.
 
 **Keep in sync with:** `agent-context/ignore-files.md` §2 (the tier
 table) and the banner in `templates/02-future-README.template.md`.
+
+**Sites:** master `README.md` · status: current, verified 2026-10-20.
+
+### CH-readme-04 · The document-driven loop
+
+```text
+ intent ─► SPEC ─► agent ─► code ─► GATE ─► evidence ─► history
+             ▲                                           │
+             └────────── lessons become documents ◄──────┘
+```
+
+**Shows:** the doctrine in one line — documents drive generation, gates
+demand proof, history accumulates, and lessons flow back as documents.
+
+**How to read it:** top row = the forward path of one unit of work; the
+bottom return line = self-refinement (a correction ends as a new
+document, not a memory).
+
+**Keep in sync with:** the doctrine bullets above it and the
+process-report / tostudy templates it references.
 
 **Sites:** master `README.md` · status: current, verified 2026-10-20.
