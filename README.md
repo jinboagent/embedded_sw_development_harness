@@ -1,5 +1,7 @@
 # embedded-agent-kit
 
+**English** | [简体中文](README_zh.md)
+
 **A process kit for building software with AI agents — extracted from a
 real hardware project where LLM agents developed, tested, and shipped
 ESP32 firmware over months of sessions.**
@@ -229,22 +231,24 @@ service; `bug_check/` is optional).
 ### One-time setup (per project)
 
 1. Fill every `{{PLACEHOLDER}}` — each template lists its **Edit points** at the top.
-3. Author `AGENTS.*.md` + `CLAUDE.md` from the skeletons; keep the
+2. Author `AGENTS.*.md` + `CLAUDE.md` from the skeletons; keep the
    "stay in sync" header.
-4. Install the commit hook once per clone:
+3. Install the commit hook once per clone:
    `git config core.hooksPath git-workflow/githooks`
-5. Seed `docs/chart-registry.*.md` from `tools/chart-registry.template.md`,
+4. Seed `docs/chart-registry.*.md` from `tools/chart-registry.template.md`,
    then `python tools/check_charts.py --scan` to adopt existing diagrams.
-6. Write the first `status/status-<date>-<slug>.md` + `status/LATEST.md`.
-7. Author the files the entry points promise: root `README.md`,
+5. Write the first `status/status-<date>-<slug>.md` + `status/LATEST.md`.
+6. Author the files the entry points promise: root `README.md`,
    `docs/quickstart.md`, `docs/tostudy.md` (all in `templates/`).
-8. Register your first baseline in `FEATURES.*.md`; cut feature branches
+7. Register your first baseline in `FEATURES.*.md`; cut feature branches
    per `git-workflow/feature-branch-policy.md`.
-9. Seed `bug_check/README.md` if you track bugs by ID.
-10. Adapt `templates/unit_test_template.md` (Unity C) if the project is
+8. Seed `bug_check/README.md` if you track bugs by ID.
+9. Adapt `templates/unit_test_template.md` (Unity C) if the project is
     C firmware; otherwise replace with your stack's equivalent.
-11. Set ignore files per `agent-context/ignore-files.md` (and copy
+10. Set ignore files per `agent-context/ignore-files.md` (and copy
     `templates/.gitignore.template.md` → `.gitignore`).
+11. Install the `skills/` you want into your agent's skills directory
+    (see `skills/README.md`).
 12. Before anything goes public, run the privacy audit block in
     `harness/00-global-context/publishing_privacy.template.md`.
 
@@ -285,6 +289,7 @@ service; `bug_check/` is optional).
 | `harness/` | The three-tier tree: constitution, feature specs, process reports + evidence rules |
 | `templates/` | Fill-in files: feature spec, Unity C tests, status snapshots, tests README, quickstart, learning journal, root README, `.gitignore`, bug tracking + fix reports |
 | `tools/` | Chart-registry checker + registry template (mechanical diagram governance) |
+| `skills/` | Agent skills (standard SKILL.md format): tmux-esp32 workflow, chart governance, evidence gate, diagrams, Medium articles, pre-publish audit — copy into any agent's skills dir |
 
 ## Why it is the way it is
 

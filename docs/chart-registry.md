@@ -12,6 +12,10 @@
 | CH-readme-01 | master | current | `README.md:86-102` | unicode-box | the session loop description | 2026-10-20 | 585b50d9 | 1 |
 | CH-readme-02 | master | current | `README.md:169-177` | unicode-box | the feature-branch policy flow | 2026-10-20 | 73d3b67c | 1 |
 | CH-readme-03 | master | current | `README.md:207-215` | unicode-box | the context-tier table in agent-context/ignore-files.md | 2026-10-20 | ef055523 | 1 |
+| CH-readme-zh-01 | Chinese variant of CH-readme-01 | current | `README_zh.md:62-78` | unicode-box | 会话循环（中文变体） | 2026-10-21 | 1ac44195 | 1 |
+| CH-readme-zh-02 | Chinese variant of CH-readme-02 | current | `README_zh.md:115-123` | unicode-box | 功能生命周期（中文变体） | 2026-10-21 | 534651bc | 1 |
+| CH-readme-zh-03 | Chinese variant of CH-readme-03 | current | `README_zh.md:148-156` | unicode-box | 上下文分层（中文变体） | 2026-10-21 | a225c916 | 1 |
+| CH-readme-zh-04 | Chinese variant of CH-readme-04 | current | `README_zh.md:103-105` | unicode-box | 文档驱动循环（中文变体） | 2026-10-21 | 1fdac55d | 1 |
 | CH-harness-readme-01 | master | current | `harness/README.md:5-8` | tree | the harness folder layout | 2026-10-20 | 96b06f4e | 1 |
 
 ## Catalog
